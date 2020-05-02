@@ -3,35 +3,39 @@ Just a basic introduction to Deep Learning, and why its getting the tread in rec
 
 # Week 2 - Logistic Regression as Neural Network
 Logistic Regression - algorithm for binary classification. Eg. image has a cat(1) or no-cat(0). x->image, y->output label.
-Image as input -> red, green and blue color channels. So image of 64x64, then we will have 3x64x64 matrix of pixel intensity values. Convert into 1-d input vector **n**-dim. 
-Label as output -> 1 value for each input **1**-dim.
 
-Notation:
-* (x,y) - single trianing example; 
+* **Image as input** -> red, green and blue color channels. So image of 64x64 will have 3x64x64 matrix of pixel intensity values. Convert into 1-d input vector **n**-dim.
+* **Label as output** -> 1 value for each input **1**-dim.
+
+**Notation:**
+* (x,y) - single trianing example 
 * Training examples - (x1,y1)...(xm,ym) -> m training examples
 * X matrix to denote all input; stacking all inputs into columns; X = [x1,x2,...,xm]; so matrix dim *n x m*.
 * Y matrix to denote all labels - stack all labels into columns; Y = [y1,y2...ym]; so matrix dim *1 x m*.
 * Stacking into columns helps in easier implementation.
 
-Binary Classification - 
+### Binary Classification - 
 Given x, want hat{y}=P(y=1|x); x is n-dim, so paramters *w* of the LR model will be n-dim with bias b, a real number.
 For linear regression - hat{y} = wTx + b. This cant give us probability.
 
 So LR gives hat{y}=sigmoid(wTx + b).
 
-![Sigmoid](imgs/sigmoid.png) | ![Definition of Sigmoid](imgs/sigmoid-def.png)
+| ![Sigmoid](imgs/sigmoid.png) | ![Definition of Sigmoid](imgs/sigmoid-def.png) |
+| :-: | :-: |
 
 **Note**: In NN programming, we keep w and b separate, while, we can also merge them together and append a 1 to the input.
 
 Loss - L(hat{y},y) - used to measure how good out output hat{y} is as compared to y.
-Note: Squared error in case of LR makes the loss function non-convex.
+
+**Note**: Squared error in case of LR makes the loss function non-convex.
 
 Instead we use
+``` 
 L(hat{y},y) = -y*log*hat{y} + (1-y)*log*(1-hat{y})
-
+```
 ![Loss Intuition](imgs/loss-intuition.png)
 
-Cost function - J(w,b) = 1/m* *sum_i=1^m*(L(hat{yi},yi))
+**Cost function** - J(w,b) = 1/m* *sum_i=1^m*(L(hat{yi},yi))
 
 So, want to find w,b to minimize the cost function.
 
@@ -40,12 +44,12 @@ So, want to find w,b to minimize the cost function.
 ## Gradient Descent 
 Taking a step downhill steepest descent.
 
-![Gradient Descent Algo](imgs/gd-algo.png)
-![Gradient Descent Plot](imgs/gd-fig.png)
+| ![Gradient Descent Algo](imgs/gd-algo.png) | ![Gradient Descent Plot](imgs/gd-fig.png) |
+| :-: | :-: |
 
 For each time-step, 
-  for the current setting of the parameters, find the gradient (which tells us the slope)
-  move in the opposite direction of slope so as to reduce our cost function
+  * for the current setting of the parameters, find the gradient (which tells us the slope)
+  * move in the opposite direction of slope so as to reduce our cost function
 
 
 ## Computation Graph & Derivatives - 
@@ -62,7 +66,8 @@ To calculate dH/gv -> easiar as J is a function of v.
 To calculate dJ/da -> need to apply chain rule, as J is a function of v, and v is a function of a.
 
 So first calculate how much v changes on changing a, then how much J changes in changing v.
-so dJ/da = (dJ/dv).(dv/da)
+
+    so dJ/da = (dJ/dv).(dv/da)
 
 **Note**: In code, (dJ/dv) will be represented by dv, as we will be computing the derivative of J only with every variable.
 
@@ -81,7 +86,8 @@ so dJ/da = (dJ/dv).(dv/da)
 * dw+=xi*dzi
 
 ## Vecotrization of Logistic Regression -
-**Forward Pass - **
+
+**Forward Pass -**
 * X = [x1,x2,....xm] - Stack input vectors columnwise.
 * w = [w1,w2,...,wm]T - Column vector
 * b = [b1,b2,....,bm] - Row vector
@@ -89,7 +95,7 @@ so dJ/da = (dJ/dv).(dv/da)
 * Z = np.dot(wT,X) + b -> b here a scaler, but python uses broadcasting and converts it into vector.
 * A = [a1,a2,....,am] = sigmoid(Z)
 
-**Backward Pass - **
+**Backward Pass -**
 * Y = [y1,y2....,ym]
 * dZ = [dz1,dz2,...,dzm] = A - Y
 * db = 1/m * np.sum(dZ)
