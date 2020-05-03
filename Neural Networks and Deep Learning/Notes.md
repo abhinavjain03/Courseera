@@ -81,27 +81,27 @@ So first calculate how much v changes on changing a, then how much J changes in 
 ## Vectorization - 
 * Dot Product - np.dot(A,b)
 * Exponentiation - np.exp(v)
-* np.log, np.abs, np.maximum, 1/v, v**2
+* np.log, np.abs, np.maximum, 1/v, v**2 -> power, a\*b->elementwise product 
 * dw = np.zeros((n,1))
 * dw+=xi*dzi
 
 ## Vecotrization of Logistic Regression -
 
 **Forward Pass -**
-* X = [x1,x2,....xm] - Stack input vectors columnwise.
-* w = [w1,w2,...,wm]T - Column vector
-* b = [b1,b2,....,bm] - Row vector
-* Calculate Z = [z1,z2,...,zm] = wTX + b
-* Z = np.dot(wT,X) + b -> b here a scaler, but python uses broadcasting and converts it into vector.
-* A = [a1,a2,....,am] = sigmoid(Z)
+* X = [x1,x2,....xm] - Stack input vectors columnwise. (Shape: *n x m*)
+* w = [w1,w2,...,wm]T - Column vector (Shape: *n x 1*)
+* b = [b1,b2,....,bm] - Row vector (Done with broadcasting, initially a scalar)
+* Calculate Z = [z1,z2,...,zm] = wTX + b (Shape: *1 x m*)
+* Z = np.dot(wT,X) + b -> b here a scaler, but python uses broadcasting and converts it into vector. (Shape: *1 x m*)
+* A = [a1,a2,....,am] = sigmoid(Z) (Shape: *1 x m*)
 
 **Backward Pass -**
-* Y = [y1,y2....,ym]
-* dZ = [dz1,dz2,...,dzm] = A - Y
-* db = 1/m * np.sum(dZ)
-* dw = 1/m * XdZT
-* W -= alpha*dW
-* B -= alpha*dB
+* Y = [y1,y2....,ym] (Shape: *1 x m*)
+* dZ = [dz1,dz2,...,dzm] = A - Y (Shape: *1 x m*)
+* db = 1/m * np.sum(dZ) (Scalar)
+* dw = 1/m * XdZT (Shape: *n x 1*)
+* w -= alpha\*dw (Shape: *n x 1*) -> alpha - learning rate
+* b -= alpha\*db (Scalar) -> alpha - learning rate
 
 ## Broadcasting - 
 ![Broadcasting](imgs/broadcast.png)
