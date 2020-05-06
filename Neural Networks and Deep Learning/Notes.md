@@ -157,7 +157,7 @@ We have *m* training examples.
 
 ![Vectorize over examples](imgs/nn-vector.png)
 
-## Activation Functions
+## Activation Functsions
 Until now we have seen sigmoid activation function.
 
 **tanh** -> shifted version of sigmoid function. always better than sigmoid. as it centers the data. 0 mean and 1 variance.
