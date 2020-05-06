@@ -113,7 +113,7 @@ So first calculate how much v changes on changing a, then how much J changes in 
 * use reshape to make sure about the shapes of the matrices, reshape is an inexpensive operation. 
 
 # Week 3 - Shallow Neural Networks
-## Neural Networ Overview
+## Neural Network Overview
 Similar to Logistic Regression as we saw earlier, but sigmoid(wTx+b) happens multiple times with different w's. These w's are the parameters of the *layers* of the NN.
 
 ## Representation
@@ -125,9 +125,10 @@ Single Hidden layer -
 * Hidden layer's output will be a[1] and so on.
 * In the fig., shape of a[1] is (*4 x 1*).
 
-Note: This is a two layer NN, input layer is not counted as a official layer.
+**Note**: This is a two layer NN, input layer is not counted as a official layer.
 
 Hidden layers and output layer has parameters. In this case, w[1] nad b[1].
+
 Shape of w[1] -> (*4 x 3*); 4-> # of nodes in the layer; 3-> # of input features
 
 ## Computing Output and Vectorizing operations
@@ -138,8 +139,10 @@ ai = sigmoid(zi) (output of 1 node)
 
 Vectorize node computation - Each node computes sigmoid(wTx+b), there are 4 nodes, so stack these 4 row vectors to form a matrix.
 So shape will be (*4 x n*)
-Now n depends in the shape of the input. Here, input is (*3 x 1*). So shape of the wwight matrix **W1** will be (*4 x 3*).
-So wTx will be of shape (*4 x 1*) corresponding to zi of each node in the layer.
+
+Now n depends in the shape of the input. Here, input is (*3 x 1*). So shape of the weight matrix **W1** will be (*4 x 3*).
+
+So W1x will be of shape (*4 x 1*) corresponding to zi of each node in the layer.
 
 ![Vectorize over nodes](imgs/nn-vectorize.png)
 
@@ -150,24 +153,24 @@ We have *m* training examples.
 
 * Take training examples and stack them in columns. X matrix. So shape (*n x m*)
 * This will give us Z of shape (*n x m*), as we will have computed Z for all the m-training examples and they will be stacked together.
-Note: Horizontal Index corresponds to training examples. Vertical index corresponds to nodes of the NN.
+**Note**: Horizontal Index corresponds to training examples. Vertical index corresponds to nodes of the NN.
 
 ![Vectorize over examples](imgs/nn-vector.png)
 
 ## Activation Functions
 Until now we have seen sigmoid activation function.
 
-tanh -> shifted version of sigmoid function. always better than sigmoid. as it centers the data. 0 mean and 1 variance.
+**tanh** -> shifted version of sigmoid function. always better than sigmoid. as it centers the data. 0 mean and 1 variance.
 Except for output layer, depends on the task, eg. for binary classification, we need a value between 0 and 1. SO use sigmoid.
 
-Drawback - if z very large or very small, gradients become 0 and they are flat at extreme values, so learning becomes very slow.
+*Drawback of exponential Activations* - if z very large or very small, gradients become 0 and they are flat at extreme values, so learning becomes very slow.
 
-Popular choice - ReLU - Rectified Linear Unit
+Popular choice - **ReLU** - Rectified Linear Unit
 Gradient is always 1 for z>0. But for z<0, gradient is 0. That's a drawback. 
 
-Solution - Leaky ReLU. When z<0, there is a slight sloe so that the gradient is not 0.
+Solution - **Leaky ReLU**. When z<0, there is a slight slope so that the gradient is not 0.
 
-USE ReLU. Learning is faster as slope is 1 always. Most of the z's in the layer will be >0, so learning will still be there.
+**Note:**: USE ReLU. Learning is faster as slope is 1 always. Most of the z's in the layer will be >0, so learning will still be there.
 
 ![Activation Functions](imgs/activation.png)
 
@@ -177,12 +180,15 @@ Multiple linear layers can be composed into a single linear layer. So activation
 Can be used in the output layer if we need a real value instead of capped values.
 
 Derivatives - 
-* sigmoid - sig(z)(1-sig(z))
- ![Sigmoid Derivative](imgs/derivative-sigmoid.png)
-* tanh - 1 - sq{tanh(x)}
+* sigmoid -> sig(z)(1-sig(z))
+
+![Sigmoid Derivative](imgs/derivative-sigmoid.png)
+* tanh -> 1 - sq{tanh(x)}
+
 ![tanh Derivative](imgs/derivative-tanh.png)
-* ReLU - 1 if z>=0; 0 if z<0
-* Leaky ReLU -  1 if z>-0; 0.01 if z<0
+* ReLU -> 1 if z>=0; 0 if z<0
+* Leaky ReLU ->  1 if z>-0; 0.01 if z<0
+
 ![ReLU Derivative](imgs/derivative-relu.png)
 
 ## Gradient Descent for NN - Backpropagation
@@ -198,10 +204,9 @@ Explanantion -
 
  w = np.random.randn((2,2)) * 0.01
  
- Note: 0.01 because we want weights to be small, because exponential activation functions have low slope on larger values.
+ Note: 0.01 because we want weights to be small, as exponential activation functions have low slope on larger values.
  
  b = np.zeros((2,1))
  
- b can be initialized with 0's, b's do not have the symmetry problem. Its called symmetry breaking problem.
+ b can be initialized with 0's, b's do not have the symmetry problem. Its called **symmetry breaking** problem.
 
- 
