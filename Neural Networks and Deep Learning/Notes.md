@@ -269,7 +269,7 @@ For l=1 to L:
 ![DNN - Backward](imgs/DNN-backward.png)
   * *Input*: da[l] and cache (Z[l], W[l],b[l]) *Output*: da[l-1], dW[l] and db[l]
   * *Initialization*: dA[L] = -(y/a) + (1-y)/(1-a) [For Logistic Regression, binary classification]
-  * dZ[l] = dA[l]*g'[l](Z[l])
+  * dZ[l] = dA[l]*g'\[l\](Z[l])
   * dW[l] = mp.dot(dZ[l], A[l-1].T)/m
   * db[l] = np.sum(dZ[l], axis=1, keepdims=True)/m
   * dA[l-1] = np.dot(W[l].T,dZ[l])
