@@ -89,8 +89,8 @@ So first calculate how much v changes on changing a, then how much J changes in 
 
 **Forward Pass -**
 * X = [x1,x2,....xm] - Stack input vectors columnwise. (Shape: *n x m*)
-* w = [w1,w2,...,wm]T - Column vector (Shape: *n x 1*)
-* b = [b1,b2,....,bm] - Row vector (Done with broadcasting, initially a scalar)
+* w = [w1,w2,...,wn]T - Column vector (Shape: *n x 1*)
+* b = [b1,b2,....,bn] - Row vector (Done with broadcasting, initially a scalar)
 * Calculate Z = [z1,z2,...,zm] = wTX + b (Shape: *1 x m*)
 * Z = np.dot(wT,X) + b -> b here a scaler, but python uses broadcasting and converts it into vector. (Shape: *1 x m*)
 * A = [a1,a2,....,am] = sigmoid(Z) (Shape: *1 x m*)
