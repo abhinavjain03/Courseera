@@ -86,7 +86,7 @@ So first calculate how much v changes on changing a, then how much J changes in 
 * `dw = np.zeros((n,1))`
 * `dw += xi*dz[i]`
 
-## Vecotrization of Logistic Regression -
+## Vectorization of Logistic Regression -
 
 ### Forward Pass
 | Item | Description | Shape | 
@@ -96,6 +96,7 @@ So first calculate how much v changes on changing a, then how much J changes in 
 | b  | Bias | Scalar |
 | Z = [z1,z2,...,zm] | `np.dot(w.T,X) + b` | *1 x m* |
 | A = [a1,a2,....,am] | `sigmoid(Z)` | *1 x m* |
+
 **Note**: b here a scaler, but python uses broadcasting and converts it into vector. (Shape: *1 x m*)
 
 ### Backward Pass
@@ -107,6 +108,7 @@ So first calculate how much v changes on changing a, then how much J changes in 
 | dw = [dw1,dw2,...,dwn].T | Calculate Gradients `dw = 1/m*np.dot(X,dZ.T)` | *n x 1* |
 | w | Update `w -= alpha*dw` | *n x 1* | -> 
 | b | Update `b -= alpha*db` | Scalar | 
+
 **Note**: alpha - learning rate
 
 ## Broadcasting - 
