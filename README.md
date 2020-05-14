@@ -1,5 +1,5 @@
-# Courseera Notes Repository
-This is a repository that contains notes for variety of courses on Courseera. This can help anyone who is looking for digital notes for these courses for reference or quick revision.
+# Coursera Notes Repository
+This is a repository that contains notes for variety of courses on Coursera. This can help anyone who is looking for digital notes for these courses for reference or quick revision.
 
 *Note*: The courses in emphasised font are in progress.
 
