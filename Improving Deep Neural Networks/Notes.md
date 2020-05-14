@@ -49,8 +49,14 @@ Solutions for overfitting or High Variance
 
 * In LR, apply regularization on the parameters of the model.
 ![Regularization - LR](imgs/regularize-LR.png)
-   * **L2 Regularization** - Euclidean norm of the weights scaled with *lambda/2m*, regularization parameter is added to the loss *J*. **((lambda/2m)\*np.dot(w.T,w))**
-   * **L1 Regularization** - L1 norm of the weights scaled with *lambda/2m*, regularization parameter is added to the loss *J*. Using this, w will end up being a sparse matrix (meaning w will have lots of 0's). **((lambda/2m)\*sum{w})**
+   * **L2 Regularization** - Euclidean norm of the weights scaled with *lambda/2m*, regularization parameter is added to the loss *J*. 
+    ```python
+                 (lambda/2m)*np.dot(w.T,w)
+    ```
+   * **L1 Regularization** - L1 norm of the weights scaled with *lambda/2m*, regularization parameter is added to the loss *J*. Using this, w will end up being a sparse matrix (meaning w will have lots of 0's). 
+   ```python
+               (lambda/2m)*np.sum(np.abs(w))
+   ```
 **Note:** *lambda* is a hyper parameter. 
 **Note:** Usually omit *b*, as it is very less number as compared to *w*.
 
@@ -60,7 +66,7 @@ Solutions for overfitting or High Variance
 
    * **Implementation of L2 Regularization** - During derivative computation of w, dw, add the gradient of the regularization term too.
 
-      So, dw_l = (from backprop) + (lambda/m)*w_l
+      So, `dw_l = (from backprop) + (lambda/m)*w_l`
 
 **Note:** L2 Regularization is also called **weight-decay**. As we are making it a little smaller as we subtract the regularization term from w.
 
@@ -76,10 +82,10 @@ Solutions for overfitting or High Variance
 #### Implementing Dropout (Inverted dropout) - 
 Let's add dropout layer after layer3.
 * Output of layer 3 -> *a3*, keep_probs=0.8 (let's say)
-* d3 = np.random.randn(a3.shape[0], a3.shape[1]) < keep_probs.   
+* `d3 = np.random.randn(a3.shape[0], a3.shape[1]) < keep_probs`.   
   **Note**: This makes d3 a boolean array but on elementwise multiplication, this will be treated as 0 or 1.
-* a3 = np.multiply(a3, d3) -> elementwise multiplication
-* s3 /= keep_probs -> for scaling such that the expected value of z4 doesnt change. (z4 = np.dot(w4,a3) + b4 and a3 will be reduced bt 20%, so we scale the a3 by 0.8) - This is **inverted dropout**
+* `a3 = np.multiply(a3, d3)` -> elementwise multiplication
+* `s3 /= keep_probs` -> for scaling such that the expected value of z4 doesnt change. (`z4 = np.dot(w4,a3) + b4` and a3 will be reduced bt 20%, so we scale the a3 by 0.8) - This is **inverted dropout**
 
 During test time, we dont use dropout. And we dont need any scaling as we have already used inverted dropout (Scaling during training).
 
@@ -117,10 +123,18 @@ Just stop earlier.
 * Partial solution of Exploding or Vanishing gradients
 
 The initialization should depend on the input of that node. More number of inputs, small weights. 
-  * If using *ReLU* activation, var=2/n. **w\[l\] = np.random.randn(shape)\*np.sqrt(2/n\[l-1\])**
-  * If using *tanh* activation, var=1/n. **w\[l\] = np.random.randn(shape)\*np.sqrt(1/n\[l-1\])** 
-  * Or **w\[l\] = np.random.randn(shape)\*np.sqrt(1/\(n\[l-1\]+n\[l\]))**
-
+  * If using *ReLU* activation, var=2/n. 
+    ```python
+        w[l] = np.random.randn(shape)*np.sqrt(2/n[l-1])
+    ```
+  * If using *tanh* activation, var=1/n. 
+    ```python
+        w[l] = np.random.randn(shape)*np.sqrt(1/n[l-1]) 
+    ```
+  * Or 
+    ```python
+        w[l] = np.random.randn(shape)*np.sqrt(1/(n[l-1]+n[l]))
+    ```
 ## Numerical Approximation of Gradients
 ![Numerical Approximation](imgs/numerical-approx-gradient.png)
 
