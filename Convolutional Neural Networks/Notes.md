@@ -136,6 +136,7 @@ Example ConvNet:
 | f | - | 5 | 2 | 5 | 2 | - |  - | - | - |
 | Activation size | 3072 | 6272 | 1568 | 1600 | 400 | 400 | 120 | 84 | 10 |
 | Parameters | - | 608 | - | 3216 | - | - | 48120 | 10164 | 850
+
 **Note**: As we go deeper, the height and width decreases, while number of channels increase.
 
 **Note**: Size of activation decreases gradually for better performance.
