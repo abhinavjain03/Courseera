@@ -7,5 +7,5 @@ The following courses are present:
 1. Neural Networks and Deep Learning (Deep Learning Specialization by Andrew Ng - Course 1)
 2. Improving Deep Neural Networks (Deep Learning Specialization by Andrew Ng - Course 2)
 3. Structuring Machine Learning Projects (Deep Learning Specialization by Andrew Ng - Course 3)
-4. *Convolutional Neural Networks (Deep Learning Specialization by Andrew Ng - Course 3)*
+4. *Convolutional Neural Networks (Deep Learning Specialization by Andrew Ng - Course 4)*
 
