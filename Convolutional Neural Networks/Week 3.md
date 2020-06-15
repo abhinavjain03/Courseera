@@ -144,7 +144,7 @@
 * Shape of output label y = 3 x 3 x 16(2x8)
 * **Create Training Set**
   
-  ![YOLO Example Drid](imgs/yolo-eg.png)
+  ![YOLO Example Grid](imgs/yolo-eg.png)
   |Grid Cell | Component | pc1 | bx1 | by1 | bh1 | bw1 | ped1 | car1 | moto1 |
   | :-: | :-: | :-: | :-: | :-: | :-: | :-:| :-: | :-: | :-: |
   | 1 | Anchor Box 1 Values | 0 | ? | ? | ? | ? | ? | ? | ? |  
@@ -160,7 +160,7 @@
   * Two bounding boxes for each grid cell.
   * Remove low prob bounding boxes
   * For each class(pedestrian, car, motorcycle), apply non-max suppression.
-* [You Look Only Once: Unified, Real time Object Detection - Redmon (YOLO)](https://arxiv.org/pdf/1506.02640.pdf)
+* [YOLO9000: Better, Faster, Stronger - Redmon, Farhadi (YOLO9000)](https://arxiv.org/pdf/1612.08242.pdf)
 
 ## Region Proposal - RCNN
 * Regions with CNNs
