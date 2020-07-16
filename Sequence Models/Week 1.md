@@ -106,10 +106,10 @@
 
 | | Basic RNN | Simple GRU | Full GRU | LSTM |  
 | :-: | :-: | :-: | :-: | :-: |
-| Cell | ![RNN Cell](imgs/rnn-cell.png) | ![Simple GRU Cell](imgs/gru-cell.png)| Something | ![LSTM Cell](imgs/lstm-cell.png) |
+| Cell | ![RNN Cell](imgs/rnn-cell.png) | ![Simple GRU Cell](imgs/gru-cell.png)| Slight modification of Simple GRUs | ![LSTM Cell](imgs/lstm-cell.png) |
 | Equation | `a<t> = g(np.dot(Wa,[a<t-1>, x<t>]) + ba)` | `c<t> = a<t>` <br> `c_hat<t> = tanh(np.dot(Wc, [c<t-1>, x<t>]) + bc)` <br> `gamma_u = sigmoid(np.dot(Wu, [c<t-1>, x<t>]) + bu)` <br> `c<t> = gamma_u*c_hat<t> + (1-gamma_u)*c<t-1>` | `c<t> = a<t>` <br> `c_hat<t> = tanh(np.dot(Wc, [gamma_r*c<t-1>, x<t>]) + bc)` <br> `gamma_u = sigmoid(np.dot(Wu, [c<t-1>, x<t>]) + bu)` <br> `gamma_r = sigmoid(np.dot(Wr, [c<t-1>, x<t>]) + br)` <br> `c<t> = gamma_u*c_hat<t> + (1-gamma_u)*c<t-1>` | `c_hat<t> = tanh(np.dot(Wc, [a<t-1>, x<t>]) + bc)` <br> `gamma_u = sigmoid(np.dot(Wu, [a<t-1>, x<t>]) + bu)` <br> `gamma_f = sigmoid(np.dot(Wf, [a<t-1>, x<t>]) + bf)` <br> `gamma_o = sigmoid(np.dot(Wo, [a<t-1>, x<t>]) + bo)` <br> `c<t> = gamma_u*c_hat<t> + gamma_f*c<t-1>` <br> `a<t> = gamma_o*tanh(c<t>)` | 
 | Memory | No Memory | The `gamma_u` maintains the cell state i.e. if something from the earlier timesteps is needed at the later timesteps, then `gamma_u` will be set accordingly such that c\<t\> contains the information from the previosu steps.| Same as simple GRU | Setting appropriate values to the update (`gamma_u`) and forget (`gamma_f`) gates can help the LSTM cell to control what information to pass on to the next time step.  |
-| Vanishing Gradient | Suffers from Vanishing Gradient | The update gate maintains the value of c\<t\>, either through c\<t-1\> or through c_hat\<t\>, so doesnt encounter the vanishing gradient problem.| Same as Simple GRU | asd |
+| Vanishing Gradient | Suffers from Vanishing Gradient | The update gate maintains the value of c\<t\>, either through c\<t-1\> or through c_hat\<t\>, so doesnt encounter the vanishing gradient problem.| Same as Simple GRU | The forget gate helps in solving the vanishing gradient in LSTMs. |
 
 **Note**: 
 * In GRUs, *gamma_u* and *gamma_r* are update and reset gates respectively, which which controls the amuount of information to pass or stop.
